@@ -1,484 +1,571 @@
-﻿<html xmlns="http://www.w3.org/TR/REC-html40">
-
-
-<!-- Mirrored from www.cs.cmu.edu/~nlao/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Feb 2018 05:01:57 GMT -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
- 
-<meta HTTP-EQUIV="content-type" CONTENT="text/html; charset=UTF-8"></meta>
-<title>Ni Lao's Homepage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ni Lao — Homepage</title>
 <style>
-       img {
-              max-width: 100% !important;
-              max-height: 100% !important;
-           }
+  :root{
+    --bg:#0e1318;--bg2:#131a22;--card:#1a212c;--card2:#202836;
+    --ink:#ece6d8;--muted:#9aa6b2;--faint:#6b7682;--line:#33414f;
+    --gold:#e3b341;--gold2:#f2cd6b;--blue:#6fb1c9;--red:#e0524a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 560px at 82% -8%,rgba(227,179,65,.07),transparent 60%),
+      radial-gradient(820px 460px at -8% 8%,rgba(155,135,212,.08),transparent 55%),var(--bg);
+    color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.55}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{color:var(--gold2)}
+  /* immersive full-bleed hero */
+  .hero{position:relative;width:100%;overflow:hidden}
+  .hero>img{width:100%;height:56vh;min-height:360px;max-height:660px;object-fit:cover;object-position:center 44%;display:block}
+  .hero .scrim{position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(14,19,24,.12) 0%,rgba(14,19,24,0) 26%,rgba(14,19,24,.5) 70%,var(--bg) 100%)}
+  .hero .htext{position:absolute;left:0;right:0;bottom:0;padding:0 20px 34px;text-align:center}
+  h1{margin:0 0 8px;font-size:clamp(30px,5.4vw,56px);
+    background:linear-gradient(90deg,var(--gold2),#fff7e6 42%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 2px 18px rgba(0,0,0,.55))}
+  h1 .zh{color:#fff7e6;-webkit-text-fill-color:#fff7e6;opacity:.92}
+  .gmail{display:block;height:24px;width:auto;margin:6px auto 0;opacity:.9}
+  .sub{color:#e9e1cf;font-style:italic;margin:0 auto;max-width:770px;font-size:clamp(14px,1.7vw,17px);text-shadow:0 1px 16px rgba(0,0,0,.75)}
+  .sub a{color:var(--gold2);border-bottom:1px dotted rgba(242,205,107,.5)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 2px}
+  .stat{display:inline-flex;gap:7px;align-items:baseline;padding:6px 13px;border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;background:rgba(14,19,24,.45);backdrop-filter:blur(6px);font-size:13px;color:#cbd3da}
+  .stat b{color:#fff;font-size:15px}
+
+  /* two-column layout with sticky left TOC */
+  .layout{max-width:1180px;margin:0 auto;padding:26px 18px 70px;display:flex;gap:28px;align-items:flex-start}
+  .toc{position:sticky;top:18px;flex:0 0 190px}
+  .toc .lbl{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin:0 0 10px 12px}
+  .toc a{display:block;padding:7px 12px;border-radius:9px;color:var(--muted);font-size:14px;
+    border-left:2px solid transparent;transition:.12s}
+  .toc a:hover{color:var(--gold2);background:var(--card)}
+  .toc a.active{color:var(--gold2);border-left-color:var(--gold);background:rgba(227,179,65,.07)}
+  .content{flex:1 1 auto;min-width:0}
+  @media(max-width:820px){
+    .layout{flex-direction:column;gap:0;padding-top:0}
+    .toc{position:sticky;top:0;z-index:30;flex:none;width:100%;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;
+      background:rgba(14,19,24,.92);backdrop-filter:blur(9px);border:1px solid var(--line);border-radius:12px;padding:9px}
+    .toc .lbl{display:none}
+    .toc a{border-left:0;border:1px solid var(--line);padding:6px 11px;font-size:13px}
+    .toc a.active{border-color:var(--gold);border-left:1px solid var(--gold)}
+  }
+
+  /* section cards */
+  section.card{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:6px 22px 20px;margin:0 0 20px;scroll-margin-top:80px}
+  section.card>h2{font-size:20px;color:var(--gold2);margin:18px 0 6px;padding-bottom:9px;border-bottom:1px solid var(--line);
+    display:flex;align-items:baseline;gap:10px}
+  section.card>h2 .n{font-size:12px;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-weight:400}
+  h3.grp{font-size:12.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--faint);margin:22px 0 8px}
+
+  .lead p{margin:10px 0;color:var(--ink)}
+  .linkrow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 2px}
+  .linkrow a{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);font-size:13.5px}
+  .linkrow a:hover{border-color:var(--gold)}
+
+  /* publication entries */
+  .pub{border-left:2px solid var(--line);padding:3px 0 3px 15px;margin:0 0 15px;transition:.12s}
+  .pub:hover{border-left-color:var(--gold)}
+  .pub .t{color:var(--ink)}
+  .pub .t a{font-weight:600}
+  .pub .venue{color:var(--muted);font-size:13.5px}
+  .pub .meta{font-size:12.5px;color:var(--faint)}
+  .pub .meta a{color:var(--blue)}
+  .pub .meta a:hover{color:var(--gold2)}
+  b{color:var(--ink)}
+  .note{margin-top:7px;font-size:12.5px;color:var(--gold2);background:rgba(227,179,65,.05);
+    border-left:2px solid var(--gold);border-radius:0 6px 6px 0;padding:6px 11px;font-style:italic}
+  .note b{color:var(--gold2);font-style:normal}
+
+  .plain p{margin:9px 0;color:var(--ink);font-size:14.5px}
+  .plain .venue{color:var(--muted)}
+
+  footer{text-align:center;color:var(--faint);font-size:12.5px;margin-top:30px}
+  @media(max-width:640px){.wrap{padding:16px 12px 50px}section.card{padding:4px 15px 16px}}
 </style>
 </head>
-
-<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
-
-<div class=Section1>
-
-<img border="0" src="images/mtv-birds.jpeg" align="center" >
-<h2>
-Ni Lao (<span lang="ZH-CN" >劳逆</span>)
-<img border="0" src="images/gmail.png" width="159" height="29">
-</h2>
-
- <p >I work on 
-  <a href="http://arxiv.org/pdf/1406.7445v1">machine learning</a>, 
-  <a href="publication/2010/2010.ML.PRA.pdf">information retrieval</a>, and 
-  <a href="publication/2012/2012.emnlp.paper.pdf"> natural language processing</a>.
-Previously I have studied a wide range of topics such as 
- <a href="publication/older/Chapter_18.pdf"> robotic soccer</a>, 
- <a href="publication/older/p375-yuan.pdf"> computer system diagnosis</a>, 
- <a href="https://www.microsoft.com/en-us/research/publication/object-level-vertical-search/"> product search</a>, and
- <a href="publication/2009/2009-NTCIR7-IR4QA-LaoN.pdf"> question answering</a>.
- Now I am interested in 
- <a href="publication/2017-nsm-acl.pdf"> learning to control machines</a>, and 
- <a href="publication/2015-KB-workshop.pdf"> learning to create machines</a>. </p>
-
-I graduated from <a href="http://www.lti.cs.cmu.edu/">Language
-Technologies Institute</a>, <a href="http://www.cs.cmu.edu/">School of Computer
-Science</a> at <a href="http://www.cmu.edu/">Carnegie Mellon University</a>. 
-My thesis was advised by professor <a href="http://www.cs.cmu.edu/~wcohen/">William
-W. Cohen</a>. 
-I worked at <a href="http://research.google.com/">Google</a> and <a href="https://machinelearning.apple.com/">Apple</a> on language understanding and question answering.
-I was the chief scientist at  <a href="https://saymosaic.com/">SayMosaic</a>. 
-Now I work at Google on large pretrained models.
-</p>
-
-
-<p >My <a href="doc/cv.2025.pdf">CV</a>, 
-<a href="doc/RS.pdf">research statement</a>, 
-and <a href="publication/2012/thesis.pdf">thesis</a>.  
-My collection of  <a href="fun/index.html"> interesting stuff</a></span> 
-<!--and <a href="http://nilao1980.spaces.live.com/">MSNSpace </a></p>-->
-</p>
-<p >
-I TAed classes <a href="http://malt.ml.cmu.edu/mw/index.php/Machine_Learning_with_Large_Datasets_10-605_in_Spring_2012"> 
-Machine Learning with Large Datasets, 2012</a> and   <a href="http://www.cs.cmu.edu/~epxing/Class/10701/"> 
-Machine Learning, 2010</a>.
-</p>
-
-
-<p> My 
-<a href="https://twitter.com/lao_ni"> Twitter</a>, 
-<a href="https://www.linkedin.com/in/ni-lao/"> LinkedIn</a>,  
-<a href="http://medium.com/@ni-lao/"> Medium</a>,  
-and <a href="https://www.facebook.com/noon99"> Facebook</a>. 
-</p>
-
- 
-<h2>Selected Publications</h2>
-
-<p> <i> (Patents) <a href="https://patents.google.com/?inventor=Ni+Lao"> Google Patents </a> </i> </p>
-
-<p> Cheng HE, Ni Lao, Xiuqi Tan, Sumang Liu, Method and apparatus for searching historical data, US20190370398A1, 2019 </p>
-
-<p> Ni Lao, Chen Liang, Quoc V Le, John Blitzer, 
-Neural question answering system, 
-US20190130251A1. 2019 </p>
-
-<p> Ni Lao, Lukasz Mieczyslaw Kaiser, Nitin Gupta, Afroz Mohiuddin, Preyas Popat, 
-Answer to question neural networks,  
-US20180114108A1, WO2018097907A1, DE202017106363U1, GB2557014A. 2018 </p>
-
-<p> Ni Lao, Jiazhong NIE, Fan Yang, 
-Natural language processing with an n-gram machine, 
-US Patent App. 16/069,781, WO2019083519A1, 2017 </p>
-
-<p> A Subramanya, F Pereira, N Lao, J Blitzer, R Gupta, 
-Querying a data graph using natural language queries
-US Patent 10,810,193 </p>
-
-
-<p> Kevyn B Collins-thompson, Ni Lao, 
-Context-Aware Query Alteration, 
-US Patent App. 13/043,500, 2012 </p>
-
-<p> <i> (Peer reviewed papers)
-<a href="https://www.semanticscholar.org/author/N.-Lao/1914797"> Semantic Scholar </a> ,
-<a href="http://scholar.google.com/citations?user=hxEoGAMAAAAJ"> Google Scholar </a> ,
-<a href="http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/l/Lao:Ni.html"> DBLP </a>
-</i> </p>
-
-
-<p> Gengchen Mai, Krzysztof Janowicz,  Rui Zhu, Ling Cai, Ni Lao, 
- <a href="https://agile-giss.copernicus.org/articles/2/8/2021/">
- Geographic Question Answering: Challenges, Uniqueness, Classification, and Future Directions
-</a>,
-  AGILE: GIScience Series 2, 1-21, 2021. 
-</p>
-
-
-<p> Gengchen Mai, Krzysztof Janowicz, Ling Cai, Rui Zhu, Bo Yan, Blake Regalia, Bo Yan, Meilin Shi, Ni Lao, 
- <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/tgis.12629">
- SE‐KGE: A location‐aware Knowledge Graph Embedding model for Geographic Question Answering and Spatial Semantic Lifting
-</a>,
-  in Transactions in GIS, 2020. 
-</p>
-
-<p> Gengchen Mai, Krzysztof Janowicz, Bo Yan, Rui Zhu, Ling Cai, Ni Lao, 
- <a href="https://openreview.net/forum?id=rJljdh4KDH">   
- Multi-Scale Representation Learning for Spatial Feature Distributions using Grid Cells </a>,
-  in ICLR 2020. 
-  <a href="publication/2020iclr-space2vec.pdf"> slides </a>, 
-  <a href="https://www.youtube.com/watch?v=7hTtBXqea1E"> spotlight presentation </a>, 
-  <a href="https://github.com/gengchenmai/space2vec"> github </a>
-<br> <b>Notes:</b> Symbolic representations are efficient and accurate, and that is how mammals represent positions and locations.
-</p>
-
-<p> 
-  Mai et al, Semantically-Enriched Search Engine for Geoportals: A Case Study with ArcGIS Online, In: Proceedings of AGILE 2020, Jun. 16 - 19, 2020, Chania, Crete, Greece.
-</p>
-
-<p> Gengchen Mai, Krzysztof Janowicz, Bo Yan, Rui Zhu, Ling Cai, Ni Lao. 
- <a href="https://arxiv.org/abs/1910.00084">   
- Contextual Graph Attention for Answering Logical Queries over Incomplete Knowledge Graphs</a>,
-  In the 10th ACM International Conference on Knowledge Capture (K-CAP 2019)
-</p>
-
-
-<p> Felix Wu, Boyi Li, Lequn Wang, Ni Lao, John Blitzer, Kilian Q. Weinberger, 
- <a href="https://arxiv.org/abs/1909.13128"> 
-  Integrated Triaging for Fast Reading Comprehension</a>,
-  Preprint, 2019.
-</p>
-
-
-<p> Jacob Biloki, Chen Liang, Ni Lao, 
- <a href="https://openreview.net/pdf?id=HJxPAFgEON"> 
-  Neural Program Planner for Structured Predictions</a>,
-  In ICLR 2019, Workshop on Deep Reinforcement Learning Meets Structured Prediction.
-</p>
-
-
-<p> Felix Wu, Boyi Li, Lequn Wang, Ni Lao, John Blitzer, Kilian Q. Weinberger, 
- <a href="https://arxiv.org/abs/1902.11291"> 
-  FastFusionNet: New State-of-the-Art for DAWNBench SQuAD</a>,
-  Technical Report, 2019
-</p>
-
-<p> Gengchen Mai, Krzysztof Janowicz and Cheng He, Sumang Liu, Ni Lao. 
- <a href="https://arxiv.org/abs/1810.02802"> 
-  POIReviewQA: A Semantically Enriched POI Retrieval and Question Answering Dataset</a>,
-  In 12th Workshop on Geographic Information Retrieval (GIR 2018)
-</p>
-
-<p> Chen Liang, Mohammad Norouzi, Jonathan Berant, Quoc Le, Ni Lao,
- <a href="https://arxiv.org/abs/1807.02322"> 
-  Memory Augmented Policy Optimization for Program Synthesis with Generalization </a>,
-  In NIPS 2018
-<a href="https://medium.com/@noon99/do-androids-dream-of-great-success-757a3fc8ff6b"> Medium </a>
-<br> <b>Notes:</b>  Animals dream of memory traces of high emotional/motivational values.
-The optimal experience replay strategy in RL is to balance good and bad experiences focusing on the more supprising ones.
-</p>
-
-<p> T. Mitchell, W. Cohen, E. Hruschka, P. Talukdar, B. Yang, J. Betteridge, A. Carlson, B. Dalvi, M. Gardner, B. Kisiel, J. Krishnamurthy, N. Lao, K. Mazaitis, T. Mohamed, N. Nakashole, E. Platanios, A. Ritter, M. Samadi, B. Settles, R. Wang, D. Wijaya, A. Gupta, X. Chen, A. Saparov, M. Greaves, J. Welling,
- <a href="https://dl.acm.org/citation.cfm?id=3191513"> 
-  Never-Ending Learning</a>,
-  Communications of the ACM, 2018
-</p>
-
-<p> Juanzi Li, Ming Zhou, Guilin Qi, Ni Lao, Tong Ruan, Jianfeng Du,
- <a href="http://www.springer.com/gp/book/9789811073588"> 
-  Knowledge Graph and Semantic Computing. Language, Knowledge, and Intelligence</a>,
-  Communications in Computer and Information Science, Springer, 2017
-</p>
-
-<p>Fan Yang, Jiazhong Nie, William W. Cohen, Ni Lao, 
-<a href="https://arxiv.org/pdf/1711.06744">Learning to Organize Knowledge with N-Gram Machines </a>, 
-ICLR 2018 Workshop.
-<a href="publication/2018-ngm-iclr-poster.pdf">poster</a> 
-<a href="http://www.akbc.ws/2017/">AKBC</a> 
-<a href="publication/2017-ngm-akbc-poster.pdf">best poster award</a>,  
-<!--
-<a href="https://sites.google.com/view/ciai2017/schedule">CIAI</a> 
-<a href="publication/2017-ngm-ciai-poster.pdf">poster</a> 
--->
-<br> <b>Notes:</b> Towards indexing meaning in text with a symbolic open-domain schema. 
-</p>
-
-<p>Chen Liang, Jonathan Berant, Quoc Le, Kenneth D. Forbus, Ni Lao, 
-<a href="publication/2017-nsm-acl.pdf"> <b>Neural Symbolic Machines</b>:
-Learning Semantic Parsers on Freebase with Weak Supervision </a>, ACL 2017. 
-<a href="publication/2016-nsm-poster.pdf">poster</a>  <a href="publication/2016-nsm.pdf">slides</a> <a href="publication/2017-nsm-acl-slides.pdf">slides</a> 
-<br> <b>Notes:</b> We want a symbolic machine, which is good at large scale KG computation, to be controlled by a neural net, which is good at learning from data.
-</p>
-
-
-<p>Felix Wu, Ni Lao, John Blitzer, Guandao Yang, and Kilian Weinberger, 
-<a href="https://arxiv.org/abs/1711.04352"> Fast Reading Comprehension with Convnets </a>, 
-Techincal Report, 2017. </p>
-
-
-<p>Ni Lao,  Einat Minkov and William Cohen, <a href="publication/2015.acl.pdf"> Learning relational features with backward random walks </a>, ACL 2015. <a href="publication/2015.acl.poster.pdf">poster</a></p>
-
-
-<p> William Yang Wang, Kathryn Mazaitis, Ni Lao, Tom M. Mitchell, William W. Cohen,
-<a href="http://www.cs.cmu.edu/~yww/papers/ProPPR_MLJ_sub.pdf"> 
-Efficient Inference and Learning in a Large Knowledge Base: Reasoning with Extracted Information using a Locally Groundable First-Order Probabilistic Logic</a>, 
- Machine Learning Journal (MLJ 2015), Springer.</p>
-
-<p> T. Mitchell, W. Cohen, E. Hruscha, P. Talukdar, J. Betteridge, A. Carlson, B. Dalvi, M. Gardner,B. Kisiel,J. Krishnamurthy, N. Lao, K. Mazaitis, T. Mohammad, N. Nakashole, E. Platanios,A. Ritter, M. Samadi, B. Settles, R.Wang, D.Wijaya, A. Gupta, X. Chen, A. Saparov, M. Greaves, J.Welling (2015): 
-<a href="http://www.cs.cmu.edu/~wcohen/postscript/aaai-2015.pdf"> 
-Never-Ending Learning</a> in AAAI-2015. </p>
-
-<p> Ni Lao, Jun Zhu: <a href="http://arxiv.org/pdf/1406.7445v1">  Contrastive Feature Induction for Efficient Structure Learning of Conditional Random Fields</a>. 
-CoRR abs/1406.7445  (2014) <a href="code/trmrf-src-20151206.jar"> 
-code</a> 
-<br> <b>Notes:</b> Evaluate exponentially many CRF features efficiently by only considering  big gradients, which is very sparse.
-</p>
-
-<p> Xin Luna Dong, Evgeniy Gabrilovich, Geremy Heitz, Wilko Horn, <b>Ni Lao</b>,
-Kevin Murphyy, Thomas Strohmann, Shaohua Sun, Wei Zhang
-<a href="publication/2014.kdd.pdf">
-Knowledge Vault: A Web-Scale Approach to Probabilistic Knowledge Fusion</a>. 
-KDD, 2014  
-<br> <b>Notes:</b> auto-matic KG construcion at Google scale.
-</p>
-
-<p><b>Ni Lao</b>, Amarnag Subramanya, Fernando Pereira, William W. Cohen 
-<a href="publication/2012/2012.emnlp.paper.pdf">
-Reading The Web with Learned Syntactic-Semantic Inference Rules</a>. 
-EMNLP, 2012
-<br> <b>Notes:</b> read the web.
-</p>
-
-<p><b>Ni Lao</b>, William W. Cohen, 
-<a href="publication/2012/2012.dils.pdf">
-Personalized Reading Recommendations for Saccharomyces Genome Database</a>. 
-DILS, 2012  <a href="publication/2012/2012.dils.poster.portrat.pdf"> poster</a> </p>
-
-<p><b>Ni Lao</b>, Tom Mitchell, William W. Cohen, 
-<a href="publication/2011/2011.emnlp.paper.pdf">
-Random Walk Inference and Learning in A Large Scale Knowledge Base</a>. 
-EMNLP, 2011  <a href="publication/2011/2011.emnlp.slides.pdf"> slides</a>
-<a href="publication/2011/2011.emnlp.poster.pdf"> poster</a> 
-<a href="data/publish.amt.labels.tar.tar"> AMT labels of 16 relations </a> 
-<a href="data/publish.distant.supervision.tar.tar"> Distant Supervision labels of 96 relations</a> 
-<br> <b>Notes:</b> To learn effectively we need to first set a budget for every direction/branch we try.
-</p>
-
-<p>Jun Zhu, <b>Ni Lao</b>, Ning Chen, Eric P. Xing
-<a href="publication/2011/2011.kdd.topic.pdf">
-Conditional Topical Coding: an Efficient Topic Model Conditioned on Rich Features</a>. 
-KDD, 2011  </p>
-
-
-<p><b>Ni Lao</b>, William W. Cohen,
-<a href="publication/2010/2010.ML.PRA.pdf">
-Relational retrieval using a combination of path-constrained random walks</a>
-Machine Learning, 2010, Volume 81, Number 1, Pages 53-67&nbsp; (ECML, 2010
-<a href="publication/2010/2010.ECML.slides.pdf"> slides</a>
-<a href="publication/2010/2010.ECML.poster.pdf"> poster</a> )</p>
-
-<p><b>Ni Lao</b>, Jun Zhu, Liu Liu, Yandong Liu, William W. Cohen, 
-<a href="publication/2010/2010.NIPS.CVI.pdf">
-Efficient Relational Learning with Hidden Variable Detection</a>. 
-NIPS, 2010 <a href="publication/2010/2010.NIPS.CVI.poster.pdf"> poster</a> 
-<br> <b>Notes:</b> Where do new concepts come from? They come from the estimated gain of data likelihood.
-</p>
-
-<p><b>Ni Lao</b>, William W. Cohen, 
-<a href="publication/2010/2010.KDD.PRA.pdf"> 
-Fast Query Execution for Retrieval Models based on Path Constrained Random Walks</a>. 
-KDD, 2010 
-<br> <b>Notes:</b> Randomness is your friend for both efficiency and quality.
-</p>
-
-<p>Jun Zhu, <b>Ni Lao</b>,  E. P. Xing, 
-<a href="publication/2010/2010.KDD.GLight.pdf">
-Grafting-Light: Fast, Incremental Feature Selection and Structure Learning of Markov Random Fields</a>. 
-KDD, 2010 
-<br> <b>Notes:</b> Where do new features come from? They come from the estimated gain of data likelihood.
-</p>
-
-<p><b>Lao, Ni</b>, Hideki Shima, Teruko Mitamura and Eric Nyberg. 2008.
-<a href="publication/2009/2009-NTCIR7-IR4QA-LaoN.pdf">
-Query Expansion and Machine Translation for Robust Cross-Lingual Information Retrieval</a>
-, in Proceedings of NTCIR-7 Workshop, Japan.</p>
-
-<p>Shima, Hideki, <b>Ni Lao</b>, Eric Nyberg and Teruko Mitamura. 2008. 
-<a href="publication/2009/2009-NTCIR7-CCLQA-ShimaH.pdf">
-Complex Cross-lingual Question Answering as Sequential Classification and Multi-Document Summarization Task</a>
-, in Proceedings of NTCIR-7 Workshop, Japan.</p>
-
-<p>W. Zuo, <b>N. Lao</b>, Y. Geng, and K. Ma. 2008. 
-<a href="publication/2008/2008JPE-GeoSVM.pdf">
-GeoSVM: an efficient and effective tool to predict species' potential distributions</a>. 
-Journal of Plant Ecology, 1(2): 143-145.
-<br> <b>Notes:</b> Genetic Algorithm sucks. SVM (and max entropy) models rocks.
-</p>
-
-<p>Yiming Yang,Abhimanyu Lad, <b>Ni Lao</b>, Abhay Harpale, Bryan Kisiel, Monica Rogati, 
-<a href="publication/2007/yang-sigir07.pdf">
-Utility-based information distillation over temporally sequenced documents</a>, 
-SIGIR, pp. 31-38, 2007.
-<br> <b>Notes:</b> simulated user experience from logs.
-</p>
-
-<p>Chun Yuan; <b>Ni Lao</b>; Ji-Rong Wen; Jiwei Li; Zheng Zhang; Yi-Min Wang; Wei-Ying Ma, 
-<a  href="publication/older/p375-yuan.pdf">
-Automated Known Problem Diagnosis with Event Traces, </a>
-EuroSys, 2006.
-<br> <b>Notes:</b> PC Genomics.
-</p>
-
-<p><b>Ni Lao</b>, Ji-Rong Wen, Wei-Ying Ma, Yi-Min Wang,
-<a href="publication/older/ni_LISA.pdf">
-Combine High Level Symptom and Low Level State Information for Configuration Fault Diagnosis</a>,
-LISA, 2004.</p>
-
-<p>Ji-Rong Wen, <b>Ni Lao</b>, Wei-Ying Ma, 
-<a href="publication/older/p255-Wen.pdf">
-Probabilistic Model for Contextual Retrieval</a>, 
-SIGIR, 2004.
-<br> <b>Notes:</b> you can find/create great data in an industry environment.
-</p>
-
-<p>Archana Ganapathi, Yi-Min Wang, <b>Ni</b> <b>Lao</b>, Ji-Rong Wen, 
-<a href="publication/older/ganapathia_DSN_registry.pdf">
-Why PCs Are Fragile and What We Can Do About It: A Study of Windows Registry Problems</a>, 
-Dependable System and Network (DSN), 2004.</p>
-
-<p>Jinyi Yao, <b>Lao Ni</b>, Fan Yang, Yunpeng Cai, Zengqi Sun, 
-<a href="publication/older/Chapter_18.pdf">
-Technical Solutions of TsinghuAeolus for Robotic Soccer</a>. 
-Robocup 2003: 205-213,RoboCup, pp. 205-213, 2003
-<br> <b>Notes:</b> a two-time RoboCup world champion used dynamic programming and geometry (instead of statistical machine learning).
-</p>
-
-<h2> Manuscript and Presentations</h2>
-
-<p><b>Ni Lao</b>, <a href="publication/2026-neuroscience-and-AI.pdf">  Neuroscience and AI </a>. 2026. 
-In this talk we compare the algorithms in neuroscience against their corresponding algorithms in AI.
-</p>
-
-<p><b>Ni Lao</b>, <a href="publication/2021-Understand-and-Organize.pdf">  Learning to Understand Questions and Organize Knowledge </a>. 2021. 
-In this talk I first introduce previous work in query understanding -- more specifically weakly supervised semantic parsing and its related issues such as 1) symbolic representations for efficient inference; 2) unbiased low-variance gradient estimation with experience replays; 3) sequence reranking model design and training. 
-Then I discuss preliminary work in document understanding, which aims to achieve generalizability, scalability and accountability beyond the current large sequence models.
-</p>
-
-<p><b>Ni Lao</b>, <a href="https://medium.com/syncedreview/google-open-sources-lingvo-framework-for-sequence-to-sequence-modeling-c62d5e52a774"> A Review of Google's Lingvo </a>. 2019.
-By invitation of Synced I wrote a review for Google's Lingvo framework. 
-I sincerely thank for the help from Patrick Nguyen and Esther Lee.
-</p>
-
-<p><b>Ni Lao</b>, <a href="publication/2019-Lecun-Cake.pdf"> Yann LeCun's Cake Explained </a>. 2019. This essay was based on <a href="https://www.youtube.com/watch?v=o9rxofxDf-I"> an interview</a> I got from Robin.ly</p>
-
-<p><b>Ni Lao</b>, <a href="publication/201901.jiangmen.tutorial.pdf"> Weakly Supervised 
-Natural Language Understanding </a>. JiangMen tutorial, 2019. <a href="https://www.youtube.com/watch?v=EzZu7LgKQaU"> video</a> </p>
-
-<p><b>Ni Lao</b>, <a href="publication/2018.aifrontiers.tutorial.pdf"> Weakly Supervised 
-Natural Language Understanding </a>. AIFrontiers tutorial, 2018. </p>
-<p><b>Ni Lao</b>, <a href="publication/2018-Androids-Dream.pdf"> Do Androids Dream of Great Success? </a>. 2018. </p>
-
-<p><b>Ni Lao</b>, <a href="publication/2017-NSLU-stanford.pdf"> Neural Symbolic Language Understanding </a>. 2017. </p>
-<p><b>Ni Lao</b>, <a href="publication/2017-text-gen.pdf"> Text Generation Survey </a>. 2017. </p>
-<p><b>Ni Lao, Xipeng Qiu</b>, <a href="publication/2017-ccks.pdf"> Knowledge Acquisition </a>. 2017. </p>
-
-<p><b>Ni Lao</b>, <a href="publication/2016-nips.pdf"> NIPS 2016 Overview </a>. 2016. </p>
-<p><b>Ni Lao</b>, <a href="publication/2016-nsm.pdf"> Neural Symbolic Machines </a>. 2016. </p>
-
-<p><b>Ni Lao</b>, <a href="publication/2015-KB-workshop.pdf"> New Development in Knowledge Acquisition, Inference, and Applications </a>. 2015. (This is a lecture at <a href="http://www.ccf.org.cn/sites/ccf/xhdtnry.jsp?contentId=2897719127940">CCF ADL65<a>. I added my take on the relationship between connectionism and symbolism, which seems to be an important issue at the moment.)
- </p>
-<!--
-<p><b>Ni Lao</b>, <a href="unpublished/2012.elements.pdf"> Elements of Intelligence</a>. 2012. </p>
--->
-<p><b>Ni Lao</b>, <a href="unpublished/2012.elephant-ai.pdf"> Elephant and AI </a>. LTI Colloquium Report, Spring 2012. </p>
-<p><b>Ni Lao</b>, <a href="unpublished/2012.verbal.programming.pdf"> Programming by Demonstrations and Verbal Commands</a>. LTI Colloquium Report, Spring 2012 </p>
-<p><b>Ni Lao</b>, <a href="unpublished/2011.semantics.pdf"> Beyond Shallow Semantics</a>. LTI Colloquium Report, Fall 2011. </p>
-<p><b>Ni Lao</b>, <a href="unpublished/2011.ccg.fractal.pdf"> CCG, Fractal, and Emergence</a>. LTI Colloquium Report, Spring 2011. </p>
-<p><b>Ni Lao</b>, <a href="unpublished/2011.RL.unknown.pdf"> Reinforcement Learning In An Unknown Domain </a> (slides). 2011. </p>
-
-<!--<p><b>Ni Lao</b>, <a href="unpublished/2010/2010.fall.personal.assistant.pdf"> Relation Machines</a>. LTI Colloquium Report, Fall 2010. </p>
--->
-<p><b>Ni Lao</b>, <a href="unpublished/2010.spring.POM.pdf"> Probablistic Ontology Model</a>. LTI Colloquium Report Fall 2010. </p>
-
-<p><b>Ni Lao</b>, <a href="unpublished/2009.split.emit.pdf"> Split-Emit Process for Natural Language Generation</a>. Advanced NLP seminar 2009. </p>
-<p><b>Ni Lao</b>, Jun Zhu, <a href="unpublished/2009.CFI.pdf"> Contrastive Feature Induction for Efficient Structure Learning of  Conditional Random Fields </a>. 2009. </p>
-<p><b>Ni Lao</b>, T. Mitamura, E. Nyberg, <a href="unpublished/2009.CSRL.pdf"> Tree Representations for Chinese Semantic Role Labeling</a>. 2009. </p>
-
-<p><b>Ni Lao</b>, <a href="unpublished/2007.read.the.web.pdf"> Read The Web  </a>(slides). Advanced IR seminar 2007. </p>
-<p><b>Ni Lao</b>, <a href="unpublished/2007.SchemaExtractionModel.pdf"> Schema Extraction Model  </a>. Advanced IR seminar 2007. </p>
-<p><b>Ni Lao</b>, <a href="unpublished/2007.Knowledge.Acquisition.pdf"> Knowledge Acquisition From Text--A Survey </a> Statistical NLP class 2007. </p>
-<p>&nbsp;</p>
-
-<h2>Thesis</h2>
-<p>PhD thesis, 2012. <a href="publication/2012/thesis.pdf"> 
-Efficient Random Walk Inference with Knowledge Bases</a> 
-(<a href="publication/2012/defense.pdf">slides</a>). Carnegie Mellon University</p>
-
-<p>Master thesis, 2006. <a href="publication/older/master.thesis.pdf"> 
-Data Mining Problems in Automatic Computer Diagnosis</a>. Tsinghua University</p>
-<p>Bachelor thesis, 2003. <a href="publication/older/bachelor.thesis.pdf"> 
-Mining Spatial-Temporal Data Using Constructive Induction</a>. Tsinghua University</p>
-
-<h2>Code</h2>
-
-<p>2012, <a href="code/2014.pra.zip">Path Ranking Algorithm</a> A system for 
- relational retrieval on heterogamous graphs (<a href="https://github.com/noon99jaki/pra"> github </a>) </p>
-
-<p>2006, <a href="code/geoSVM.rar">geoSVM</a> A predictive system for modeling species potential distributions 
-based on SVM. See details at  <a href="http://www.unm.edu/~wyzuo/GEO.htm"> Wenyun's page</a>  </p>
-
-<p>Data Sets</p>
-
-<p>2012, <a href="data/NELL165.zip">NELL v165</a> NELL Knowledge graph in both triple format and PRA format</p>
-<p>2010, <a href="data/2010.yeast2.gz">yeast2</a> updated yeast data with extra information about Mesh heading, chemicals and affiliations etc. (321K entities and 6.1M links)</p>
-<p>2010, <a href="data/2010.fly.gz">fly</a>  a biological literature graph with 770K  entities and 3.5M links </p>
-<p>2010, <a href="data/2010.fly.gz">yeast</a> a biological literature graph with 164K  entities and 2.8M links</p>
-
- 
-<h2>Acdemic Services</h2>
-
-<p> 2023: ACL*, EMNLP*, ICML, IJGIS, Neurips*, TALLIP, Computers &amp Security (*Area chair for large language models and reasoning)</p>
-<p> 2022: ACL, CoNLL, EMNLP, ICLR, KDD, Neurips, TGIS </p>
-<p> 2021: ACL, AAAI, CoNLL, EMNLP, ICLR, NAACL, SIGIR, TALLIP, GeoAI, NLP4ConvAI </p>
-<p> 2020: ACL, AAAI, COLING, CoNLL, EACL, EMNLP, ICLR, ICML, IJCAI, Neurips, SIGIR, TALLIP, TKDE </p>
-<p> I co-organize the Deep RL Meets Structured Prediction workshop 2019
-<a href="https://iclr.cc/Conferences/2019/Schedule?showEvent=630"> ICLR page </a>, 
-<a href="https://sites.google.com/view/iclr2019-drlstructpred"> homepage </a>, 
-<a href="publication/2019.DRL4SP.intro.pdf"> intro slides</a>
-</p>
-<p> 2019: ACL, AAAI, CCL, CoNLL, EMNLP, ICLR, IJCAI, NAACL, SIGIR, TKDE </p>
-<p> 2018: ACL, CCKS, COLING, EMNLP, NAACL, NLPCC, NIPS, SIGIR </p>
-<p> 2017: ACL, CCKS, EMNLP, IJCAI, IJCNLP, SIGIR, TKDE, WSDM, Google Research Grants </p>
-<p> 2016: CIKM, COLING, IJCAI, NAACL, TKDE, WWW, Google Research Grants </p>
-<p> 2015: CIKM, ICML, IJCAI, MLJ, NIPS, TKDE </p>
-
-<p> Since 2012 I have being the manager of the
-<a href="https://groups.google.com/forum/#!categories/ml-news"> Machine Learning News<a>  Google Group, 
-which seems to be quite popular in academia.
-<p>
-
-<!--
-<p> 2014: CIKM, KDD </p>
-<p> 2013: CIKM, Google Research Grants </p>
-<p> 2012: JCST, KDD, Neurocomputing J., SIGIR, TKDD, PKDD </p>
-<p> 2011: NIPS, T. Fuzzy Systems </p>
-<p> 2010: CIKM </p>
--->
-
-<p class=MsoNormal><b><script  type="text/javascript">
+<body>
+<div class="hero">
+  <img src="images/mtv-birds.jpeg" alt="Birds over the bay at sunset, Mountain View">
+  <div class="scrim"></div>
+  <div class="htext">
+    <h1>Ni Lao <span class="zh">劳逆</span></h1>
+    <img class="gmail" src="images/gmail-white.png" alt="email">
+
+    <p class="sub">
+      I work on <a href="http://arxiv.org/pdf/1406.7445v1">machine learning</a>,
+      <a href="publication/2010/2010.ML.PRA.pdf">information retrieval</a>, and
+      <a href="publication/2012/2012.emnlp.paper.pdf">natural language processing</a> —
+      now focused on <a href="publication/2017-nsm-acl.pdf">learning to control machines</a> and
+      <a href="publication/2015-KB-workshop.pdf">learning to create machines</a>.
+    </p>
+    <div class="chips">
+      <span class="stat"><b>Google</b> large pretrained models</span>
+      <span class="stat"><b>CMU</b> LTI · PhD</span>
+      <span class="stat"><b>40+</b> publications</span>
+      <span class="stat"><b>6</b> patents</span>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <aside class="toc">
+    <div class="lbl">Contents</div>
+    <a href="#about">About</a>
+    <a href="#links">Links</a>
+    <a href="#patents">Patents</a>
+    <a href="#papers">Papers</a>
+    <a href="#talks">Talks</a>
+    <a href="#thesis">Thesis</a>
+    <a href="#code">Code &amp; Data</a>
+    <a href="#services">Services</a>
+  </aside>
+
+  <main class="content">
+
+  <section class="card lead" id="about">
+    <h2>About</h2>
+    <p>
+      Previously I have studied a wide range of topics such as
+      <a href="publication/older/Chapter_18.pdf">robotic soccer</a>,
+      <a href="publication/older/p375-yuan.pdf">computer system diagnosis</a>,
+      <a href="https://www.microsoft.com/en-us/research/publication/object-level-vertical-search/">product search</a>, and
+      <a href="publication/2009/2009-NTCIR7-IR4QA-LaoN.pdf">question answering</a>.
+    </p>
+    <p>
+      I graduated from the <a href="http://www.lti.cs.cmu.edu/">Language Technologies Institute</a>,
+      <a href="http://www.cs.cmu.edu/">School of Computer Science</a> at
+      <a href="http://www.cmu.edu/">Carnegie Mellon University</a>. My thesis was advised by professor
+      <a href="http://www.cs.cmu.edu/~wcohen/">William W. Cohen</a>.
+      I worked at <a href="http://research.google.com/">Google</a> and
+      <a href="https://machinelearning.apple.com/">Apple</a> on language understanding and question answering,
+      and was chief scientist at SayMosaic.
+      Now I work at Google on large pretrained models.
+    </p>
+    <p>
+      I TAed <a href="http://malt.ml.cmu.edu/mw/index.php/Machine_Learning_with_Large_Datasets_10-605_in_Spring_2012">Machine Learning with Large Datasets (2012)</a>
+      and <a href="http://www.cs.cmu.edu/~epxing/Class/10701/">Machine Learning (2010)</a>.
+      Here is my collection of <a href="fun/index.html">interesting stuff</a>.
+    </p>
+  </section>
+
+  <section class="card" id="links">
+    <h2>Links &amp; Documents</h2>
+    <div class="linkrow">
+      <a href="doc/cv.2025.pdf">CV</a>
+      <a href="doc/RS.pdf">Research statement</a>
+      <a href="publication/2012/thesis.pdf">Thesis</a>
+    </div>
+    <div class="linkrow">
+      <a href="https://github.com/noon99jaki">GitHub</a>
+      <a href="https://twitter.com/lao_ni">Twitter</a>
+      <a href="https://www.linkedin.com/in/ni-lao/">LinkedIn</a>
+      <a href="http://medium.com/@ni-lao/">Medium</a>
+      <a href="https://www.facebook.com/noon99">Facebook</a>
+    </div>
+    <div class="linkrow">
+      <a href="https://patents.google.com/?inventor=Ni+Lao">Google Patents</a>
+      <a href="https://www.semanticscholar.org/author/N.-Lao/1914797">Semantic Scholar</a>
+      <a href="http://scholar.google.com/citations?user=hxEoGAMAAAAJ">Google Scholar</a>
+      <a href="http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/l/Lao:Ni.html">DBLP</a>
+    </div>
+  </section>
+
+  <section class="card plain" id="patents">
+    <h2>Patents <span class="n">6</span></h2>
+    <p>Cheng HE, Ni Lao, Xiuqi Tan, Sumang Liu, <b>Method and apparatus for searching historical data</b>, US20190370398A1, 2019</p>
+    <p>Ni Lao, Chen Liang, Quoc V Le, John Blitzer, <b>Neural question answering system</b>, US20190130251A1, 2019</p>
+    <p>Ni Lao, Lukasz Mieczyslaw Kaiser, Nitin Gupta, Afroz Mohiuddin, Preyas Popat, <b>Answer to question neural networks</b>, US20180114108A1, WO2018097907A1, DE202017106363U1, GB2557014A, 2018</p>
+    <p>Ni Lao, Jiazhong NIE, Fan Yang, <b>Natural language processing with an n-gram machine</b>, US Patent App. 16/069,781, WO2019083519A1, 2017</p>
+    <p>A Subramanya, F Pereira, N Lao, J Blitzer, R Gupta, <b>Querying a data graph using natural language queries</b>, US Patent 10,810,193</p>
+    <p>Kevyn B Collins-Thompson, Ni Lao, <b>Context-Aware Query Alteration</b>, US Patent App. 13/043,500, 2012</p>
+  </section>
+
+  <section class="card" id="papers">
+    <h2>Selected Publications</h2>
+
+    <div class="pub">
+      <div class="t">Gengchen Mai, Krzysztof Janowicz, Rui Zhu, Ling Cai, Ni Lao,
+        <a href="https://agile-giss.copernicus.org/articles/2/8/2021/">Geographic Question Answering: Challenges, Uniqueness, Classification, and Future Directions</a></div>
+      <div class="venue">AGILE: GIScience Series 2, 1-21, 2021</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Gengchen Mai, Krzysztof Janowicz, Ling Cai, Rui Zhu, Bo Yan, Blake Regalia, Bo Yan, Meilin Shi, Ni Lao,
+        <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/tgis.12629">SE‑KGE: A location‑aware Knowledge Graph Embedding model for Geographic Question Answering and Spatial Semantic Lifting</a></div>
+      <div class="venue">Transactions in GIS, 2020</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Gengchen Mai, Krzysztof Janowicz, Bo Yan, Rui Zhu, Ling Cai, Ni Lao,
+        <a href="https://openreview.net/forum?id=rJljdh4KDH">Multi-Scale Representation Learning for Spatial Feature Distributions using Grid Cells</a></div>
+      <div class="venue">ICLR 2020</div>
+      <div class="meta"><a href="publication/2020iclr-space2vec.pdf">slides</a> · <a href="https://www.youtube.com/watch?v=7hTtBXqea1E">spotlight</a> · <a href="https://github.com/gengchenmai/space2vec">github</a></div>
+      <div class="note"><b>Notes:</b> Symbolic representations are efficient and accurate, and that is how mammals represent positions and locations.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Mai et al, Semantically-Enriched Search Engine for Geoportals: A Case Study with ArcGIS Online</div>
+      <div class="venue">Proceedings of AGILE 2020, Chania, Crete, Greece</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Gengchen Mai, Krzysztof Janowicz, Bo Yan, Rui Zhu, Ling Cai, Ni Lao,
+        <a href="https://arxiv.org/abs/1910.00084">Contextual Graph Attention for Answering Logical Queries over Incomplete Knowledge Graphs</a></div>
+      <div class="venue">K-CAP 2019</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Felix Wu, Boyi Li, Lequn Wang, Ni Lao, John Blitzer, Kilian Q. Weinberger,
+        <a href="https://arxiv.org/abs/1909.13128">Integrated Triaging for Fast Reading Comprehension</a></div>
+      <div class="venue">Preprint, 2019</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Jacob Biloki, Chen Liang, Ni Lao,
+        <a href="https://openreview.net/pdf?id=HJxPAFgEON">Neural Program Planner for Structured Predictions</a></div>
+      <div class="venue">ICLR 2019, Workshop on Deep RL Meets Structured Prediction</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Felix Wu, Boyi Li, Lequn Wang, Ni Lao, John Blitzer, Kilian Q. Weinberger,
+        <a href="https://arxiv.org/abs/1902.11291">FastFusionNet: New State-of-the-Art for DAWNBench SQuAD</a></div>
+      <div class="venue">Technical Report, 2019</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Gengchen Mai, Krzysztof Janowicz, Cheng He, Sumang Liu, Ni Lao,
+        <a href="https://arxiv.org/abs/1810.02802">POIReviewQA: A Semantically Enriched POI Retrieval and Question Answering Dataset</a></div>
+      <div class="venue">12th Workshop on Geographic Information Retrieval (GIR 2018)</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Chen Liang, Mohammad Norouzi, Jonathan Berant, Quoc Le, Ni Lao,
+        <a href="https://arxiv.org/abs/1807.02322">Memory Augmented Policy Optimization for Program Synthesis with Generalization</a></div>
+      <div class="venue">NIPS 2018</div>
+      <div class="meta"><a href="https://medium.com/@noon99/do-androids-dream-of-great-success-757a3fc8ff6b">Medium</a></div>
+      <div class="note"><b>Notes:</b> Animals dream of memory traces of high emotional/motivational values. The optimal experience replay strategy in RL is to balance good and bad experiences focusing on the more surprising ones.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">T. Mitchell, W. Cohen, E. Hruschka, P. Talukdar, B. Yang, J. Betteridge, A. Carlson, B. Dalvi, M. Gardner, B. Kisiel, J. Krishnamurthy, N. Lao, K. Mazaitis, T. Mohamed, N. Nakashole, E. Platanios, A. Ritter, M. Samadi, B. Settles, R. Wang, D. Wijaya, A. Gupta, X. Chen, A. Saparov, M. Greaves, J. Welling,
+        <a href="https://dl.acm.org/citation.cfm?id=3191513">Never-Ending Learning</a></div>
+      <div class="venue">Communications of the ACM, 2018</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Juanzi Li, Ming Zhou, Guilin Qi, Ni Lao, Tong Ruan, Jianfeng Du,
+        <a href="http://www.springer.com/gp/book/9789811073588">Knowledge Graph and Semantic Computing. Language, Knowledge, and Intelligence</a></div>
+      <div class="venue">Communications in Computer and Information Science, Springer, 2017</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Fan Yang, Jiazhong Nie, William W. Cohen, Ni Lao,
+        <a href="https://arxiv.org/pdf/1711.06744">Learning to Organize Knowledge with N-Gram Machines</a></div>
+      <div class="venue">ICLR 2018 Workshop</div>
+      <div class="meta"><a href="publication/2018-ngm-iclr-poster.pdf">poster</a> · <a href="http://www.akbc.ws/2017/">AKBC</a> · <a href="publication/2017-ngm-akbc-poster.pdf">best poster award</a></div>
+      <div class="note"><b>Notes:</b> Towards indexing meaning in text with a symbolic open-domain schema.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Chen Liang, Jonathan Berant, Quoc Le, Kenneth D. Forbus, Ni Lao,
+        <a href="publication/2017-nsm-acl.pdf"><b>Neural Symbolic Machines</b>: Learning Semantic Parsers on Freebase with Weak Supervision</a></div>
+      <div class="venue">ACL 2017</div>
+      <div class="meta"><a href="publication/2016-nsm-poster.pdf">poster</a> · <a href="publication/2016-nsm.pdf">slides</a> · <a href="publication/2017-nsm-acl-slides.pdf">slides</a></div>
+      <div class="note"><b>Notes:</b> We want a symbolic machine, which is good at large scale KG computation, to be controlled by a neural net, which is good at learning from data.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Felix Wu, Ni Lao, John Blitzer, Guandao Yang, Kilian Weinberger,
+        <a href="https://arxiv.org/abs/1711.04352">Fast Reading Comprehension with Convnets</a></div>
+      <div class="venue">Technical Report, 2017</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Ni Lao, Einat Minkov, William Cohen,
+        <a href="publication/2015.acl.pdf">Learning relational features with backward random walks</a></div>
+      <div class="venue">ACL 2015</div>
+      <div class="meta"><a href="publication/2015.acl.poster.pdf">poster</a></div>
+    </div>
+
+    <div class="pub">
+      <div class="t">William Yang Wang, Kathryn Mazaitis, Ni Lao, Tom M. Mitchell, William W. Cohen,
+        <a href="http://www.cs.cmu.edu/~yww/papers/ProPPR_MLJ_sub.pdf">Efficient Inference and Learning in a Large Knowledge Base: Reasoning with Extracted Information using a Locally Groundable First-Order Probabilistic Logic</a></div>
+      <div class="venue">Machine Learning Journal (MLJ 2015), Springer</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">T. Mitchell, W. Cohen, E. Hruscha, P. Talukdar, J. Betteridge, A. Carlson, B. Dalvi, M. Gardner, B. Kisiel, J. Krishnamurthy, N. Lao, K. Mazaitis, T. Mohammad, N. Nakashole, E. Platanios, A. Ritter, M. Samadi, B. Settles, R. Wang, D. Wijaya, A. Gupta, X. Chen, A. Saparov, M. Greaves, J. Welling,
+        <a href="http://www.cs.cmu.edu/~wcohen/postscript/aaai-2015.pdf">Never-Ending Learning</a></div>
+      <div class="venue">AAAI 2015</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Ni Lao, Jun Zhu,
+        <a href="http://arxiv.org/pdf/1406.7445v1">Contrastive Feature Induction for Efficient Structure Learning of Conditional Random Fields</a></div>
+      <div class="venue">CoRR abs/1406.7445, 2014</div>
+      <div class="meta"><a href="code/trmrf-src-20151206.jar">code</a></div>
+      <div class="note"><b>Notes:</b> Evaluate exponentially many CRF features efficiently by only considering big gradients, which is very sparse.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Xin Luna Dong, Evgeniy Gabrilovich, Geremy Heitz, Wilko Horn, <b>Ni Lao</b>, Kevin Murphy, Thomas Strohmann, Shaohua Sun, Wei Zhang,
+        <a href="publication/2014.kdd.pdf">Knowledge Vault: A Web-Scale Approach to Probabilistic Knowledge Fusion</a></div>
+      <div class="venue">KDD 2014</div>
+      <div class="note"><b>Notes:</b> Automatic KG construction at Google scale.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, Amarnag Subramanya, Fernando Pereira, William W. Cohen,
+        <a href="publication/2012/2012.emnlp.paper.pdf">Reading The Web with Learned Syntactic-Semantic Inference Rules</a></div>
+      <div class="venue">EMNLP 2012</div>
+      <div class="note"><b>Notes:</b> Read the web.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, William W. Cohen,
+        <a href="publication/2012/2012.dils.pdf">Personalized Reading Recommendations for Saccharomyces Genome Database</a></div>
+      <div class="venue">DILS 2012</div>
+      <div class="meta"><a href="publication/2012/2012.dils.poster.portrat.pdf">poster</a></div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, Tom Mitchell, William W. Cohen,
+        <a href="publication/2011/2011.emnlp.paper.pdf">Random Walk Inference and Learning in A Large Scale Knowledge Base</a></div>
+      <div class="venue">EMNLP 2011</div>
+      <div class="meta"><a href="publication/2011/2011.emnlp.slides.pdf">slides</a> · <a href="publication/2011/2011.emnlp.poster.pdf">poster</a> · <a href="data/publish.amt.labels.tar.tar">AMT labels of 16 relations</a> · <a href="data/publish.distant.supervision.tar.tar">Distant supervision labels of 96 relations</a></div>
+      <div class="note"><b>Notes:</b> To learn effectively we need to first set a budget for every direction/branch we try.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Jun Zhu, <b>Ni Lao</b>, Ning Chen, Eric P. Xing,
+        <a href="publication/2011/2011.kdd.topic.pdf">Conditional Topical Coding: an Efficient Topic Model Conditioned on Rich Features</a></div>
+      <div class="venue">KDD 2011</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, William W. Cohen,
+        <a href="publication/2010/2010.ML.PRA.pdf">Relational retrieval using a combination of path-constrained random walks</a></div>
+      <div class="venue">Machine Learning, 2010, Vol. 81(1), 53-67 (ECML 2010)</div>
+      <div class="meta"><a href="publication/2010/2010.ECML.slides.pdf">slides</a> · <a href="publication/2010/2010.ECML.poster.pdf">poster</a></div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, Jun Zhu, Liu Liu, Yandong Liu, William W. Cohen,
+        <a href="publication/2010/2010.NIPS.CVI.pdf">Efficient Relational Learning with Hidden Variable Detection</a></div>
+      <div class="venue">NIPS 2010</div>
+      <div class="meta"><a href="publication/2010/2010.NIPS.CVI.poster.pdf">poster</a></div>
+      <div class="note"><b>Notes:</b> Where do new concepts come from? They come from the estimated gain of data likelihood.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, William W. Cohen,
+        <a href="publication/2010/2010.KDD.PRA.pdf">Fast Query Execution for Retrieval Models based on Path Constrained Random Walks</a></div>
+      <div class="venue">KDD 2010</div>
+      <div class="note"><b>Notes:</b> Randomness is your friend for both efficiency and quality.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Jun Zhu, <b>Ni Lao</b>, E. P. Xing,
+        <a href="publication/2010/2010.KDD.GLight.pdf">Grafting-Light: Fast, Incremental Feature Selection and Structure Learning of Markov Random Fields</a></div>
+      <div class="venue">KDD 2010</div>
+      <div class="note"><b>Notes:</b> Where do new features come from? They come from the estimated gain of data likelihood.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Lao, Ni</b>, Hideki Shima, Teruko Mitamura, Eric Nyberg,
+        <a href="publication/2009/2009-NTCIR7-IR4QA-LaoN.pdf">Query Expansion and Machine Translation for Robust Cross-Lingual Information Retrieval</a></div>
+      <div class="venue">NTCIR-7 Workshop, Japan, 2008</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Hideki Shima, <b>Ni Lao</b>, Eric Nyberg, Teruko Mitamura,
+        <a href="publication/2009/2009-NTCIR7-CCLQA-ShimaH.pdf">Complex Cross-lingual Question Answering as Sequential Classification and Multi-Document Summarization Task</a></div>
+      <div class="venue">NTCIR-7 Workshop, Japan, 2008</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">W. Zuo, <b>N. Lao</b>, Y. Geng, K. Ma,
+        <a href="publication/2008/2008JPE-GeoSVM.pdf">GeoSVM: an efficient and effective tool to predict species' potential distributions</a></div>
+      <div class="venue">Journal of Plant Ecology, 1(2): 143-145, 2008</div>
+      <div class="note"><b>Notes:</b> Genetic Algorithm sucks. SVM (and max entropy) models rock.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Yiming Yang, Abhimanyu Lad, <b>Ni Lao</b>, Abhay Harpale, Bryan Kisiel, Monica Rogati,
+        <a href="publication/2007/yang-sigir07.pdf">Utility-based information distillation over temporally sequenced documents</a></div>
+      <div class="venue">SIGIR, pp. 31-38, 2007</div>
+      <div class="note"><b>Notes:</b> Simulated user experience from logs.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Chun Yuan, <b>Ni Lao</b>, Ji-Rong Wen, Jiwei Li, Zheng Zhang, Yi-Min Wang, Wei-Ying Ma,
+        <a href="publication/older/p375-yuan.pdf">Automated Known Problem Diagnosis with Event Traces</a></div>
+      <div class="venue">EuroSys 2006</div>
+      <div class="note"><b>Notes:</b> PC Genomics.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, Ji-Rong Wen, Wei-Ying Ma, Yi-Min Wang,
+        <a href="publication/older/ni_LISA.pdf">Combine High Level Symptom and Low Level State Information for Configuration Fault Diagnosis</a></div>
+      <div class="venue">LISA 2004</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Ji-Rong Wen, <b>Ni Lao</b>, Wei-Ying Ma,
+        <a href="publication/older/p255-Wen.pdf">Probabilistic Model for Contextual Retrieval</a></div>
+      <div class="venue">SIGIR 2004</div>
+      <div class="note"><b>Notes:</b> You can find/create great data in an industry environment.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Archana Ganapathi, Yi-Min Wang, <b>Ni Lao</b>, Ji-Rong Wen,
+        <a href="publication/older/ganapathia_DSN_registry.pdf">Why PCs Are Fragile and What We Can Do About It: A Study of Windows Registry Problems</a></div>
+      <div class="venue">Dependable Systems and Networks (DSN) 2004</div>
+    </div>
+
+    <div class="pub">
+      <div class="t">Jinyi Yao, <b>Lao Ni</b>, Fan Yang, Yunpeng Cai, Zengqi Sun,
+        <a href="publication/older/Chapter_18.pdf">Technical Solutions of TsinghuAeolus for Robotic Soccer</a></div>
+      <div class="venue">RoboCup 2003, pp. 205-213</div>
+      <div class="note"><b>Notes:</b> A two-time RoboCup world champion used dynamic programming and geometry (instead of statistical machine learning).</div>
+    </div>
+  </section>
+
+  <section class="card plain" id="talks">
+    <h2>Manuscripts &amp; Presentations</h2>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="https://noon99jaki.github.io/philosophy/taxonomy">Taxonomy of Ancient Ideas</a>, 2026</div>
+      <div class="venue">An interactive map of concepts from ancient philosophy across traditions — surfacing their equivalences, resonances, and contradictions in a single explorable graph.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="publication/2026-neuroscience-and-AI.pdf">Neuroscience and AI</a>, 2026</div>
+      <div class="venue">In this talk we compare the algorithms in neuroscience against their corresponding algorithms in AI.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="publication/2021-Understand-and-Organize.pdf">Learning to Understand Questions and Organize Knowledge</a>, 2021</div>
+      <div class="venue">I first introduce previous work in query understanding — weakly supervised semantic parsing and related issues such as symbolic representations for efficient inference, unbiased low-variance gradient estimation with experience replays, and sequence reranking model design and training. Then I discuss preliminary work in document understanding, aiming for generalizability, scalability and accountability beyond current large sequence models.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="https://medium.com/syncedreview/google-open-sources-lingvo-framework-for-sequence-to-sequence-modeling-c62d5e52a774">A Review of Google's Lingvo</a>, 2019</div>
+      <div class="venue">By invitation of Synced. Thanks to Patrick Nguyen and Esther Lee.</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="publication/2019-Lecun-Cake.pdf">Yann LeCun's Cake Explained</a>, 2019</div>
+      <div class="venue">Based on <a href="https://www.youtube.com/watch?v=o9rxofxDf-I">an interview</a> from Robin.ly</div>
+    </div>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="publication/201901.jiangmen.tutorial.pdf">Weakly Supervised Natural Language Understanding</a>, JiangMen tutorial, 2019</div>
+      <div class="meta"><a href="https://www.youtube.com/watch?v=EzZu7LgKQaU">video</a></div>
+    </div>
+
+    <p><b>Ni Lao</b>, <a href="publication/2018.aifrontiers.tutorial.pdf">Weakly Supervised Natural Language Understanding</a>, AIFrontiers tutorial, 2018</p>
+    <p><b>Ni Lao</b>, <a href="publication/2018-Androids-Dream.pdf">Do Androids Dream of Great Success?</a>, 2018</p>
+    <p><b>Ni Lao</b>, <a href="publication/2017-NSLU-stanford.pdf">Neural Symbolic Language Understanding</a>, 2017</p>
+    <p><b>Ni Lao</b>, <a href="publication/2017-text-gen.pdf">Text Generation Survey</a>, 2017</p>
+    <p><b>Ni Lao, Xipeng Qiu</b>, <a href="publication/2017-ccks.pdf">Knowledge Acquisition</a>, 2017</p>
+    <p><b>Ni Lao</b>, <a href="publication/2016-nips.pdf">NIPS 2016 Overview</a>, 2016</p>
+    <p><b>Ni Lao</b>, <a href="publication/2016-nsm.pdf">Neural Symbolic Machines</a>, 2016</p>
+
+    <div class="pub">
+      <div class="t"><b>Ni Lao</b>, <a href="publication/2015-KB-workshop.pdf">New Development in Knowledge Acquisition, Inference, and Applications</a>, 2015</div>
+      <div class="venue">A lecture at <a href="http://www.ccf.org.cn/sites/ccf/xhdtnry.jsp?contentId=2897719127940">CCF ADL65</a>, with my take on the relationship between connectionism and symbolism.</div>
+    </div>
+
+    <p><b>Ni Lao</b>, <a href="unpublished/2012.elephant-ai.pdf">Elephant and AI</a>, LTI Colloquium Report, Spring 2012</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2012.verbal.programming.pdf">Programming by Demonstrations and Verbal Commands</a>, LTI Colloquium Report, Spring 2012</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2011.semantics.pdf">Beyond Shallow Semantics</a>, LTI Colloquium Report, Fall 2011</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2011.ccg.fractal.pdf">CCG, Fractal, and Emergence</a>, LTI Colloquium Report, Spring 2011</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2011.RL.unknown.pdf">Reinforcement Learning In An Unknown Domain</a> (slides), 2011</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2010.spring.POM.pdf">Probabilistic Ontology Model</a>, LTI Colloquium Report, Fall 2010</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2009.split.emit.pdf">Split-Emit Process for Natural Language Generation</a>, Advanced NLP seminar, 2009</p>
+    <p><b>Ni Lao</b>, Jun Zhu, <a href="unpublished/2009.CFI.pdf">Contrastive Feature Induction for Efficient Structure Learning of Conditional Random Fields</a>, 2009</p>
+    <p><b>Ni Lao</b>, T. Mitamura, E. Nyberg, <a href="unpublished/2009.CSRL.pdf">Tree Representations for Chinese Semantic Role Labeling</a>, 2009</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2007.read.the.web.pdf">Read The Web</a> (slides), Advanced IR seminar, 2007</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2007.SchemaExtractionModel.pdf">Schema Extraction Model</a>, Advanced IR seminar, 2007</p>
+    <p><b>Ni Lao</b>, <a href="unpublished/2007.Knowledge.Acquisition.pdf">Knowledge Acquisition From Text — A Survey</a>, Statistical NLP class, 2007</p>
+  </section>
+
+  <section class="card plain" id="thesis">
+    <h2>Thesis</h2>
+    <p>PhD thesis, 2012. <a href="publication/2012/thesis.pdf">Efficient Random Walk Inference with Knowledge Bases</a> (<a href="publication/2012/defense.pdf">slides</a>). <span class="venue">Carnegie Mellon University</span></p>
+    <p>Master thesis, 2006. <a href="publication/older/master.thesis.pdf">Data Mining Problems in Automatic Computer Diagnosis</a>. <span class="venue">Tsinghua University</span></p>
+    <p>Bachelor thesis, 2003. <a href="publication/older/bachelor.thesis.pdf">Mining Spatial-Temporal Data Using Constructive Induction</a>. <span class="venue">Tsinghua University</span></p>
+  </section>
+
+  <section class="card plain" id="code">
+    <h2>Code &amp; Data</h2>
+    <h3 class="grp">Code</h3>
+    <p>2012 — <a href="code/2014.pra.zip">Path Ranking Algorithm</a>, a system for relational retrieval on heterogeneous graphs (<a href="https://github.com/noon99jaki/pra">github</a>)</p>
+    <p>2006 — <a href="code/geoSVM.rar">geoSVM</a>, a predictive system for modeling species potential distributions based on SVM. See <a href="http://www.unm.edu/~wyzuo/GEO.htm">Wenyun's page</a></p>
+    <h3 class="grp">Data Sets</h3>
+    <p>2012 — <a href="data/NELL165.zip">NELL v165</a>, NELL knowledge graph in both triple format and PRA format</p>
+    <p>2010 — <a href="data/2010.yeast2.gz">yeast2</a>, updated yeast data with extra information about Mesh headings, chemicals and affiliations (321K entities, 6.1M links)</p>
+    <p>2010 — <a href="data/2010.fly.gz">fly</a>, a biological literature graph with 770K entities and 3.5M links</p>
+    <p>2010 — <a href="data/2010.fly.gz">yeast</a>, a biological literature graph with 164K entities and 2.8M links</p>
+  </section>
+
+  <section class="card plain" id="services">
+    <h2>Academic Services</h2>
+    <p><b>2023:</b> ACL*, EMNLP*, ICML, IJGIS, Neurips*, TALLIP, Computers &amp; Security <span class="venue">(*Area chair for large language models and reasoning)</span></p>
+    <p><b>2022:</b> ACL, CoNLL, EMNLP, ICLR, KDD, Neurips, TGIS</p>
+    <p><b>2021:</b> ACL, AAAI, CoNLL, EMNLP, ICLR, NAACL, SIGIR, TALLIP, GeoAI, NLP4ConvAI</p>
+    <p><b>2020:</b> ACL, AAAI, COLING, CoNLL, EACL, EMNLP, ICLR, ICML, IJCAI, Neurips, SIGIR, TALLIP, TKDE</p>
+    <p>I co-organized the Deep RL Meets Structured Prediction workshop, 2019 —
+      <a href="https://iclr.cc/Conferences/2019/Schedule?showEvent=630">ICLR page</a>,
+      <a href="https://sites.google.com/view/iclr2019-drlstructpred">homepage</a>,
+      <a href="publication/2019.DRL4SP.intro.pdf">intro slides</a></p>
+    <p><b>2019:</b> ACL, AAAI, CCL, CoNLL, EMNLP, ICLR, IJCAI, NAACL, SIGIR, TKDE</p>
+    <p><b>2018:</b> ACL, CCKS, COLING, EMNLP, NAACL, NLPCC, NIPS, SIGIR</p>
+    <p><b>2017:</b> ACL, CCKS, EMNLP, IJCAI, IJCNLP, SIGIR, TKDE, WSDM, Google Research Grants</p>
+    <p><b>2016:</b> CIKM, COLING, IJCAI, NAACL, TKDE, WWW, Google Research Grants</p>
+    <p><b>2015:</b> CIKM, ICML, IJCAI, MLJ, NIPS, TKDE</p>
+    <p>Since 2012 I have been the manager of the
+      <a href="https://groups.google.com/forum/#!categories/ml-news">Machine Learning News</a> Google Group,
+      which seems to be quite popular in academia.</p>
+  </section>
+
+  <footer>Ni Lao · 劳逆</footer>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); var s=document.getElementById(id); if(s) map[id]=a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){a.classList.remove('active');});
+        var a = map[e.target.id]; if(a) a.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+
+<script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script><script  type="text/javascript">
+</script>
+<script type="text/javascript">
 try {
 var pageTracker = _gat._getTracker("UA-10920666-4");
 pageTracker._trackPageview();
 } catch(err) {}
-</script></b></p>
-
-</div>
-
-<br>
-
-<br>
+</script>
 
 </body>
-
-
-<!-- Mirrored from www.cs.cmu.edu/~nlao/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Feb 2018 05:06:57 GMT -->
 </html>
